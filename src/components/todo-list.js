@@ -1,14 +1,25 @@
 import React from 'react';
-import TodoListItem from './todo-list-item';
 
-const Todolist = () => {
+import TodoListItem from './todo-list-item';
+import './todo-list.css';
+
+const TodoList = ({ todos }) => {
+
+  const elements = todos.map((item) => {
+    const { id, ...itemProps } = item;
+
     return (
-        <ul>
-            <li><TodoListItem label = "Drink cofee" important = { false } /></li>
-            <li><TodoListItem label = "Build React Apps" important = { true }  /></li>
-            <li><TodoListItem label = "Вот так вот!" important = { false } /></li>
-        </ul>
+      <li key={id} className="list-group-item">
+        <TodoListItem {...itemProps } />
+      </li>
     );
+  });
+
+  return (
+    <ul className="list-group todo-list">
+      { elements }
+    </ul>
+  );
 };
 
-export default Todolist;
+export default TodoList;
